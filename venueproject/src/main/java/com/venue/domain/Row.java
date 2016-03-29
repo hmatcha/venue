@@ -1,17 +1,22 @@
 package com.venue.domain;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import com.venue.domain.Seat;
 
 public class Row {
 	
 	private int id;
 	// have to check whether it is needed or not
 	private int numSeats;//max num of seats in each row
-	private List<Seat> seats;//list of all seats in each row 
+	private List<Seat> totalSeats;//list of all seats in each row 
+	private List<Seat> availableSeats;
+	private List<Seat> holdSeats;
 	
 	public Row(int id,List<Seat> seats) {
 		this.id = id;
-		this.seats = seats;
+		this.totalSeats = seats;
 		
 	}
 	
@@ -21,27 +26,32 @@ public class Row {
   // have to check whether it is needed or not
 	public int getNumSeats() {
 		
-		return seats.size();
+		return totalSeats.size();
 	}
 	
 
 	public List<Seat> getSeats() {
-		return seats;
+		return totalSeats;
 	}
 
 	
 
 	public int getNumOfAvailableSeats() {
 		
+		List<Seat> availableSeats = new ArrayList<Seat>();
+		int numOfavailableSeats=0;
 		
-		int availableSeats=0;
-		for(Seat seat : seats)
+		for(Seat seat : totalSeats)
 		{
 			if(SeatStatus.AVAILABLE.equals(seat.getStatus()))
-				availableSeats += 1;
+				numOfavailableSeats += 1;
+			availableSeats.add(seat);
+			
 		}
-		return availableSeats;
+		this.availableSeats = availableSeats;
+		return numOfavailableSeats;
 		
 	}
+	
 	
 }
