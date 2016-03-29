@@ -32,7 +32,7 @@ public class Person {
 	}
 	
 	
-	private Venue createVenue(int[] numLevels,String[] levelNames,double[] prices,int[] rows,int[] seats)
+	public Venue createVenue(int[] numLevels,String[] levelNames,double[] prices,int[] rows,int[] seats)
 	{
 		
 		Venue venue = new Venue(createLevels(numLevels,levelNames,prices,rows,seats));
