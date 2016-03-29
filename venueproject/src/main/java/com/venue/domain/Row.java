@@ -1,6 +1,5 @@
 package com.venue.domain;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Row {

@@ -11,7 +11,7 @@ public class Seat {
 	
 	
 	
-	public Seat(SeatStatus status, int id) {
+	public Seat(int id,SeatStatus status) {
 		super();
 		this.status = SeatStatus.AVAILABLE;
 		this.id = id;
