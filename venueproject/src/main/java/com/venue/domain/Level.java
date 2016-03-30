@@ -59,7 +59,9 @@ public class Level {
 	 * sum of available seats in each row
 	 * 
 	 */
-	public int getNumOfAvailableSeatsInAllRows(){
+	
+	
+		public int getNumOfAvailableSeatsInAllRows(){
 		int availableSeats = 0;
 		
 		 for(Row row : rows)
@@ -67,6 +69,16 @@ public class Level {
 			 availableSeats += row.getNumOfAvailableSeats();
 		 }
 		return availableSeats;
+	}
+
+	public void hold(int numOfSeatsToHold)
+	{
+		for(Row row:rows)
+		{
+			row.hold(numOfSeatsToHold);
+		}
+		
+		
 	}
 
 	

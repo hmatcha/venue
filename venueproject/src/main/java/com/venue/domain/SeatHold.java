@@ -1,14 +1,10 @@
 package com.venue.domain;
 
-import java.rmi.server.UID;
-import java.util.List;
 
 public class SeatHold {
 	
 	private int id;
-	private Level level;
-	private List<Row> rows;
-	
+	private int[] seatIds;
 
 	public SeatHold(){
 		
@@ -21,27 +17,23 @@ public class SeatHold {
 	}
 
 	
-	public SeatHold( Level level, List<Row> rows) {
+	public SeatHold(int seatHoldId,int[] seatIds) {
 		super();
 		setId();
-		this.level = level;
-		this.rows = rows;
-		
+		this.id = seatHoldId;
+		this.seatIds =seatIds;
 	}
 	
+	public int[] getSeatIds() {
+		return seatIds;
+	}
+
+
 	public int getId()
 	{
 	    return id;
 	}
 	
-	
-	public Level getLevel() {
-		return level;
-	}
-
-	public List<Row> getRows() {
-		return rows;
-	}
 
 	
 

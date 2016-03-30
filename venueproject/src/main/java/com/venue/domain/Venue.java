@@ -33,6 +33,21 @@ public class Venue {
 	 * @param levelId uniquely identifies a Level 
 	 * @return number of all available seats in particular level 
 	 */
+	
+	public SeatHold hold(int numOfSeatsToHold, int minLevel, int maxLevel,String custEmail)
+	{
+		Level level;
+		for(int i=minLevel;i<=maxLevel;i++)
+		{
+			level=levels.get(i);
+			level.hold(numOfSeatsToHold);
+		
+		}
+		SeatHold seatHold = new SeatHold();
+		return seatHold;
+		
+	}
+
 	public int getNumOfAvailableSeats(int levelId){
 		Level level = levels.get(levelId);
 		return level.getNumOfAvailableSeatsInAllRows();
