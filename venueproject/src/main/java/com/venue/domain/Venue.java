@@ -7,7 +7,7 @@ import com.venue.domain.Level;
 public class Venue {
 	
 	private List<Level> levels;
-	
+	public static List<SeatHold> seatHolds; 
 	
 	/**
 	 * @param levels different levels in the venue

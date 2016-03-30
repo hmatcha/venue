@@ -11,16 +11,16 @@ public class SeatHold {
 	}
 	
 	private int uniqueId = 0;
-	private  synchronized void setId()
+	private  synchronized int setId()
 	{
-		this.id = uniqueId++;
+		return uniqueId++;
 	}
 
 	
-	public SeatHold(int seatHoldId,int[] seatIds) {
+	public SeatHold(int[] seatIds) {
 		super();
 		setId();
-		this.id = seatHoldId;
+		this.id = setId();
 		this.seatIds =seatIds;
 	}
 	

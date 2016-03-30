@@ -71,11 +71,11 @@ public class Level {
 		return availableSeats;
 	}
 
-	public void hold(int numOfSeatsToHold)
+	public int[] hold(int numOfSeatsToHold)
 	{
 		for(Row row:rows)
 		{
-			row.hold(numOfSeatsToHold);
+			return row.hold(numOfSeatsToHold);
 		}
 		
 		
