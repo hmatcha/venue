@@ -8,14 +8,15 @@ import java.util.Map.Entry;
 import java.util.Set;
 
 public class Person {
-	private String PersonType;  //customer or owner
+	
 	private String emailId;
+	private Venue venue;
 	
 	private SeatHold seatHold;
 
-	public Person(String PersonType, String emailId) {
+	public Person(String emailId) {
 		super();
-		this.PersonType = PersonType;
+		
 		this.emailId = emailId;
 	}
 	public Person()
@@ -23,6 +24,9 @@ public class Person {
 		
 	}
 
+	public String getEmailId() {
+		return emailId;
+	}
 	public SeatHold getSeatHold() {
 		return seatHold;
 	}
@@ -32,7 +36,7 @@ public class Person {
 	}
 	
 	
-	public Venue createVenue(int[] numLevels,String[] levelNames,double[] prices,int[] rows,int[] seats)
+	private Venue createVenue(int[] numLevels,String[] levelNames,double[] prices,int[] rows,int[] seats)
 	{
 		
 		Venue venue = new Venue(createLevels(numLevels,levelNames,prices,rows,seats));
@@ -72,5 +76,15 @@ public class Person {
 		}
 		return seats;
 	}
-
+	public Venue populatevenue() {
+		
+		int[] numLevels={1,2,3,4};
+		String[] levelNames={"Orchestra","Main","Balcony1","Balcony2"};
+		double[] prices = {100.00,75.00,50.00,40.00};
+		int[] rows = {25,20,15,15};
+		int[] seats = {50,100,100,100};
+		venue = createVenue(numLevels, levelNames, prices, rows, seats);
+		return venue;
+		
+	}
 }

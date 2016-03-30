@@ -2,11 +2,17 @@ package com.venue.domain;
 
 import java.util.List;
 
+import com.venue.domain.Level;
+
 public class Venue {
 	
 	private List<Level> levels;
 	
-	//Constructor that takes List Of levels
+	
+	/**
+	 * @param levels different levels in the venue
+	 * creates venue and initializes List Of levels
+	 */
 	public Venue(List<Level> levels)
 	{
 		this.levels =levels;
@@ -23,6 +29,26 @@ public class Venue {
 		return levels;
 	}
 	
+	/**
+	 * @param levelId uniquely identifies a Level 
+	 * @return number of all available seats in particular level 
+	 */
+	public int getNumOfAvailableSeats(int levelId){
+		Level level = levels.get(levelId);
+		return level.getNumOfAvailableSeatsInAllRows();
+	}
 	
+	/**
+	 * @return number of all available seats in all different levels 
+	 */
+	public  int getAllNumOfAvailableSeats() {
+		
+		int totalNumOfAvailableSeats = 0;
+		for(Level level : levels){			
+			totalNumOfAvailableSeats += level.getNumOfAvailableSeatsInAllRows();
+		}
+		return totalNumOfAvailableSeats;
+	
+	}
 
 }

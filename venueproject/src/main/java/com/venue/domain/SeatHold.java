@@ -1,38 +1,51 @@
 package com.venue.domain;
 
+import java.rmi.server.UID;
 import java.util.List;
 
 public class SeatHold {
 	
 	private int id;
 	private Level level;
-	private Row row;
-	private List<Seat> seats;
+	private List<Row> rows;
+	
+
+	public SeatHold(){
+		
+	}
+	
+	private int uniqueId = 0;
+	private  synchronized void setId()
+	{
+		this.id = uniqueId++;
+	}
 
 	
-	public SeatHold(int id, Level level, Row row, List<Seat> seats) {
+	public SeatHold( Level level, List<Row> rows) {
 		super();
-		this.id = id;
+		setId();
 		this.level = level;
-		this.row = row;
-		this.seats = seats;
+		this.rows = rows;
+		
 	}
-
-	public int getId() {
-		return id;
+	
+	public int getId()
+	{
+	    return id;
 	}
-
+	
+	
 	public Level getLevel() {
 		return level;
 	}
 
-	public Row getRow() {
-		return row;
+	public List<Row> getRows() {
+		return rows;
 	}
 
-	public List<Seat> getSeats() {
-		return seats;
-	}
+	
+
+	
 	
 	
 	
