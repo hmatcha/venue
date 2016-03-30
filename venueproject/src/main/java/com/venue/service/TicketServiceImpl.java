@@ -1,11 +1,9 @@
 package com.venue.service;
 
 
-import java.rmi.server.UID;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 import org.apache.log4j.Logger;
 
@@ -67,60 +65,75 @@ public class TicketServiceImpl implements TicketService {
 		{
 			highLevel = maxLevel.get().intValue();
 		}
+		System.out.println("highLevel :"+highLevel+" lowLevel: "+lowLevel);
+		
 		for(int i=lowLevel; i<=highLevel; i++ )	
 		{
 			Level level = venue.getLevels().get(i);
 			//System.out.println("All availableseats : "+venue.getNumOfAvailableSeats(i));
 			int numOfRows=level.getRows().size();
-			int totalavailableSeatsinAllRows = 0; 
+			int totalavailableSeatsinAllRows = 0;
 			
 			List<Row> rows = new ArrayList<Row>();    //to use this list of rows in seatHold Constructor
 			
-			System.out.println("level no "+i);
+			System.out.println("In Level = "+level.getLevelId());
 			for(int j=0;j<numOfRows;j++) 
 			{
-				System.out.println("row no "+j);
+				
 				Row row = level.getRows().get(j);//fetching particular row from the level
 				int numOfAvailableSeatsInRow = row.getNumOfAvailableSeats();
-				System.out.println("numOfAvailableSeatsInRow : "+numOfAvailableSeatsInRow+" numSeats :"+numSeats);
+				System.out.println("numOfAvailableSeatsInRow from Row" +row.getId() +": "+numOfAvailableSeatsInRow+" numSeats :"+numSeats);
 				
 				if(numOfAvailableSeatsInRow>=numSeats)	 //seats available in same row			
 				{
 					System.out.println(row.holdSeats(numSeats));
-					if("success".equalsIgnoreCase(row.holdSeats(numSeats))) 
+					//if("success".equalsIgnoreCase(row.holdSeats(numSeats))) 
 					{
+						row.holdSeats(numSeats);
 						rows.add(row);
 						seatHold = new SeatHold(level, rows);
-						System.out.println("level in seathold :"+level.getLevelName());
 						person.setSeatHold(seatHold);
 						this.person = person;
 						return seatHold;	
 					}	
 				}
 				totalavailableSeatsinAllRows += numOfAvailableSeatsInRow;
-			}		
+			}
+			System.out.println("totalavailableSeatsinAllRows :"+totalavailableSeatsinAllRows);
 			if(totalavailableSeatsinAllRows>=numSeats)  // if seats are available but in different rows
 			{
-				for(int j=0;j<numOfRows;j++) 
+				for(int k=lowLevel; k<=highLevel; k++)	
 				{
-					Row row = venue.getLevels().get(j-1).getRows().get(j);
-					int numOfAvailableSeatsInRow = row.getAvailableSeats().size();
-					
-						if("success".equalsIgnoreCase(row.holdSeats(numSeats)))
-						{
-							 
-							numSeats -= numOfAvailableSeatsInRow;
-							rows.add(row);
-							
-						}
+					Level level2 = venue.getLevels().get(k);
+					System.out.println("In level for diffrows = "+level2.getLevelId());
+					for(int l=0;l<numOfRows;l++) 
+					{
+						System.out.println("Value of l = "+l+"   num of rows = "+ numOfRows);
+						Row row = level2.getRows().get(l);
+						int numOfAvailableSeatsInRow = row.getAvailableSeats().size();
 						
+							if("success".equalsIgnoreCase(row.holdSeats(numSeats)))
+							{
+								 
+								numSeats -= numOfAvailableSeatsInRow;
+								rows.add(row);
+								System.out.println("level in seathold :"+level.getLevelName());
+								
+							}
+							
+							System.out.println("Checking seats available in different rows");
+					}
+					
 				}
 				seatHold = new SeatHold(level, rows);
 				person.setSeatHold(seatHold);
 				this.person = person;
+				System.out.println("seatHold inside same rows :"+seatHold);
+				
 				return seatHold;
 			}
 		}
+		System.out.println("seatHold inside same rows :"+seatHold);
 		return seatHold;
 	}
 

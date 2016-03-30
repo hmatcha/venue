@@ -33,9 +33,9 @@ public class ReserveSeatsTest {
 	public void Level1Reserve() {
 		
 		venue.getNumOfAvailableSeats(0);
-		venue.getLevels().get(0).getRows().get(0).holdSeats(30);
-		venue.getLevels().get(0).getRows().get(1).holdSeats(50);
-		venue.getLevels().get(0).getRows().get(2).holdSeats(45);
+		venue.getLevels().get(0).getRows().get(0).holdSeats(10);
+		venue.getLevels().get(0).getRows().get(1).holdSeats(10);
+		venue.getLevels().get(0).getRows().get(2).holdSeats(10);
 		venue.getLevels().get(0).getRows().get(3).holdSeats(25);
 		SeatHold seatHold = service.findAndHoldSeats(2,Optional.ofNullable(0),Optional.of(3),"Madhavi");
 		

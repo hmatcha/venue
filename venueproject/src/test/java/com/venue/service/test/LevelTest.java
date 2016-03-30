@@ -38,7 +38,7 @@ public class LevelTest {
 	public void testRows() {
 		
 		
-		assertEquals(25, venue.getLevels().get(0).getRows().size());
+		assertEquals(2, venue.getLevels().get(0).getRows().size());
 	}
 	@Test
 	public void testSeatPrice() {
@@ -50,7 +50,7 @@ public class LevelTest {
 	public void testTotalSeats()
 	{
 		
-		assertEquals(1250,venue.getNumOfAvailableSeats(0));
+		assertEquals(10,venue.getNumOfAvailableSeats(0));
 		
 	}
 	@Test
@@ -58,11 +58,11 @@ public class LevelTest {
 	{
 		
 		venue.getNumOfAvailableSeats(0);
-		venue.getLevels().get(0).getRows().get(0).holdSeats(30);
-		venue.getLevels().get(0).getRows().get(1).holdSeats(50);
-		venue.getLevels().get(0).getRows().get(2).holdSeats(45);
+		venue.getLevels().get(0).getRows().get(0).holdSeats(10);
+		venue.getLevels().get(0).getRows().get(1).holdSeats(10);
+		venue.getLevels().get(0).getRows().get(2).holdSeats(10);
 		venue.getLevels().get(0).getRows().get(3).holdSeats(25);
-		assertEquals(1100,venue.getNumOfAvailableSeats(0));
+		assertEquals(5,venue.getNumOfAvailableSeats(3));
 		
 	}
 	@Test
@@ -71,12 +71,12 @@ public class LevelTest {
 		
 		
 		venue.getNumOfAvailableSeats(0);
-		venue.getLevels().get(0).getRows().get(0).holdSeats(30);
-		venue.getLevels().get(0).getRows().get(1).holdSeats(50);
-		venue.getLevels().get(0).getRows().get(2).holdSeats(45);
+		venue.getLevels().get(0).getRows().get(0).holdSeats(10);
+		venue.getLevels().get(0).getRows().get(1).holdSeats(10);
+		venue.getLevels().get(0).getRows().get(2).holdSeats(10);
 		venue.getLevels().get(0).getRows().get(3).holdSeats(25);
 		TicketService service = new TicketServiceImpl(this.venue);
-		assertEquals(1100,service.numSeatsAvailable(Optional.of(0)));//how to test no value
+		assertEquals(5,service.numSeatsAvailable(Optional.of(3)));//how to test no value
 	}
 	
 }

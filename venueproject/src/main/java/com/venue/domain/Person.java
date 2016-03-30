@@ -81,8 +81,8 @@ public class Person {
 		int[] numLevels={1,2,3,4};
 		String[] levelNames={"Orchestra","Main","Balcony1","Balcony2"};
 		double[] prices = {100.00,75.00,50.00,40.00};
-		int[] rows = {25,20,15,15};
-		int[] seats = {50,100,100,100};
+		int[] rows = {2,1,1,2};
+		int[] seats = {5,5,5,5};
 		venue = createVenue(numLevels, levelNames, prices, rows, seats);
 		return venue;
 		
