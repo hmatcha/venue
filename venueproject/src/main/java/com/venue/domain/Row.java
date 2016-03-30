@@ -45,7 +45,7 @@ public class Row {
 		
 	}
 	
-	public String hold(int numOfSeatsToHold){
+	public boolean hold(int numOfSeatsToHold){
 		
 		
 		for(Seat seat:seats)
@@ -59,11 +59,11 @@ public class Row {
 			else
 			{
 				if(seats.size()>0)
-					return "success";
+					return true;
 			}
 			
 		}
-		return "failure";
+		return false;
 	}
 	
 	
