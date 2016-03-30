@@ -60,10 +60,11 @@ public class FindAndHoldSeatsTest {
 		int num = venue.getNumOfAvailableSeats(0);
 		System.out.println("total seats in that level :"+num);
 		for(int i=0;i<venue.getLevels().get(0).getRows().size();i++)
-			venue.getLevels().get(0).getRows().get(i).holdSeats(50);
+			venue.getLevels().get(0).getRows().get(i).holdSeats(25);
 		int num2 = venue.getNumOfAvailableSeats(0);
-		System.out.println("total held seats in that level :"+num2);
-		
+		System.out.println("total seats in that level after held :"+num2);
+		int num3 = venue.getNumOfAvailableSeats(0);
+		System.out.println("total seats in that level :"+num3);
 		SeatHold seatHold = service.findAndHoldSeats(2,Optional.ofNullable(0),Optional.of(3),"Madhavi");
 		System.out.println("Name of the level :"+seatHold.getLevel().getLevelName());
 		assertEquals("Orchestra",seatHold.getLevel().getLevelName());

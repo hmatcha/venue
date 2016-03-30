@@ -70,19 +70,28 @@ public class TicketServiceImpl implements TicketService {
 		for(int i=lowLevel; i<=highLevel; i++ )	
 		{
 			Level level = venue.getLevels().get(i);
+			//System.out.println("All availableseats : "+venue.getNumOfAvailableSeats(i));
 			int numOfRows=level.getRows().size();
 			int totalavailableSeatsinAllRows = 0; 
-			List<Row> rows = new ArrayList<Row>();
+			
+			List<Row> rows = new ArrayList<Row>();    //to use this list of rows in seatHold Constructor
+			
+			System.out.println("level no "+i);
 			for(int j=0;j<numOfRows;j++) 
 			{
-				Row row = venue.getLevels().get(j).getRows().get(j);
-				int numOfAvailableSeatsInRow = row.getAvailableSeats().size();
+				System.out.println("row no "+j);
+				Row row = level.getRows().get(j);//fetching particular row from the level
+				int numOfAvailableSeatsInRow = row.getNumOfAvailableSeats();
+				System.out.println("numOfAvailableSeatsInRow : "+numOfAvailableSeatsInRow+" numSeats :"+numSeats);
+				
 				if(numOfAvailableSeatsInRow>=numSeats)	 //seats available in same row			
 				{
+					System.out.println(row.holdSeats(numSeats));
 					if("success".equalsIgnoreCase(row.holdSeats(numSeats))) 
 					{
 						rows.add(row);
 						seatHold = new SeatHold(level, rows);
+						System.out.println("level in seathold :"+level.getLevelName());
 						person.setSeatHold(seatHold);
 						this.person = person;
 						return seatHold;	

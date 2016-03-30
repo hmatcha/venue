@@ -47,28 +47,31 @@ public class Row {
 
 	public int getNumOfAvailableSeats() {
 		
-		List<Seat> availableSeats = new ArrayList<Seat>();
+		List<Seat> seats = new ArrayList<Seat>();
 		int numOfavailableSeats=0;
 		
 		for(Seat seat : totalSeats)
 		{
 			if(SeatStatus.AVAILABLE.equals(seat.getStatus()))
 				numOfavailableSeats += 1;
-			availableSeats.add(seat);
+			seats.add(seat);
 			
 		}
-		this.availableSeats = availableSeats;
+		this.availableSeats = new ArrayList<Seat>();
+		this.availableSeats.addAll(seats);
 		return numOfavailableSeats;
 		
 	}
 	public String holdSeats(int num){
 		List<Seat> heldSeats = new ArrayList<Seat>();
+		System.out.println("Available seats in Row object :"+availableSeats.size());
 		for(Seat seat:availableSeats)
 		{
 			if(num>0)
 			{
 				seat.status = SeatStatus.HELD;
 				num -= 1;
+				
 				heldSeats.add(seat);
 			}
 			else
@@ -80,6 +83,7 @@ public class Row {
 			}
 			
 		}
+		availableSeats.removeAll(heldSeats);
 		return "failure";
 	}
 	
