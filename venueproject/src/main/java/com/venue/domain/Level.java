@@ -1,41 +1,39 @@
 package com.venue.domain;
 
+import java.util.Collections;
 import java.util.List;
 
 /**
- * @author 
+ * @author
  *
  */
 public class Level {
-	
-	
+
 	private List<Row> rows;
 	private int levelId;
 	private String levelName;
 	private double price;
-	
-	
-	
+
 	/**
-	 * @param Id  uniquely identifies each row
-	 * @param levelName  name of level
-	 * @param price  each seat price in this level 
-	 * @param rows number of rows in this level
+	 * @param Id
+	 *            uniquely identifies each row
+	 * @param levelName
+	 *            name of level
+	 * @param price
+	 *            each seat price in this level
+	 * @param rows
+	 *            number of rows in this level
 	 */
-	public Level(int Id, String levelName,double price,List<Row> rows)
-	{
-		this.levelId=Id;
+	public Level(int Id, String levelName, double price, List<Row> rows) {
+		this.levelId = Id;
 		this.levelName = levelName;
-		this.price=price;
-		this.rows=rows;
-		
-		
+		this.price = price;
+		this.rows = rows;
 	}
-	
-	//Empty Constructor 
-	public Level()
-	{
-		
+
+	// Empty Constructor
+	public Level() {
+
 	}
 
 	public List<Row> getRows() {
@@ -53,33 +51,32 @@ public class Level {
 	public double getPrice() {
 		return price;
 	}
-	
+
 	/**
-	 * @return seats available in all rows
-	 * sum of available seats in each row
+	 * @return seats available in all rows sum of available seats in each row
 	 * 
 	 */
-	
-	
-		public int getNumOfAvailableSeatsInAllRows(){
+
+	public int getNumOfAvailableSeatsInAllRows() {
 		int availableSeats = 0;
-		
-		 for(Row row : rows)
-		 {
-			 availableSeats += row.getNumOfAvailableSeats();
-		 }
+
+		for (Row row : rows) {
+			availableSeats += row.getNumOfAvailableSeats();
+		}
 		return availableSeats;
 	}
 
-	public int[] hold(int numOfSeatsToHold)
-	{
-		for(Row row:rows)
-		{
-			return row.hold(numOfSeatsToHold);
+	public List<Seat> hold(int numOfSeatsToHold) {
+		for (Row row : rows) {
+			List<Seat> heldSeats = row.hold(numOfSeatsToHold);
+			
+			if(!heldSeats.isEmpty()) {
+				return heldSeats;
+			} else {
+				continue;
+			}
 		}
 		
-		
+		return Collections.emptyList();
 	}
-
-	
 }

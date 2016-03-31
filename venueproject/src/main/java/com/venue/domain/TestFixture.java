@@ -1,25 +1,21 @@
 package com.venue.domain;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
 
-public class Person {
+public class TestFixture {
 	
 	private String emailId;
 	private Venue venue;
 	
 	private SeatHold seatHold;
 
-	public Person(String emailId) {
+	public TestFixture(String emailId) {
 		super();
 		
 		this.emailId = emailId;
 	}
-	public Person()
+	public TestFixture()
 	{
 		
 	}
